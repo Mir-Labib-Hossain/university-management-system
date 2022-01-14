@@ -1,0 +1,72 @@
+B-49 (9th)
+
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183006', 'MIR FAYEK HOSSAIN', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183007', 'MIR LABIB HOSSAIN', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183023', 'RASHED RAYHAN AYON', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183024', 'TANBIR HASAN', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183012', 'MD. SHAHADAT HOSSAIN', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011181068', 'JANNATUL FERDUS SHITHI', 'Female','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183017', 'SHIHAB UDDIN MUNNA', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011181071', 'AFSHANA AKTER SHENUL', 'Female','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183001', 'K. M. IMRAN', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183004', 'MOUMITA SAHA', 'Female','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183008', 'MD. RABIUL ISLAM', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183011', 'ASHIKUR RAHMAN SHIHAB', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183013', 'MD. ISTIAK TAREQ', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011181070', 'MARIA HOSSAIN INNI', 'Female','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183015', 'MEHEDI HASAN TOUKIR', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183016', 'MD. SADMAN SHAKIB', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183019', 'BIPUL SARKER', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011183025', 'MD. ABU HORAIRA', 'Male','49');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192007', 'MOHAMMAD MAAJHARUL ISLAM BHUYAN', 'Male','49');
+
+course
+
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183007', '99','99','99','99','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183006','88','99','99','99','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011181068','76','88','73','76','88');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011181070','99','88','99','76','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011181071','67','72','67','73', '73');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183001','88','99','88','99','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183004','99','99','99','99','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183008','99','99','99','99','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183011','99','99','99','99','88');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183012','88','99','99','99','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183013','82','73','88','88','88');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183015','88','82','82','82','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183016','73','73','73','82','88');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183017','99','76','99','99','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183019','88','73','82','82','82');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183023','82','76','82','82','88');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183024','76','73','82','76','88');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011183025','76','76','82','88','99');
+INSERT INTO `b_49` (`id`, `std_id`, `Artificial Intelligence`, `Digital Signal Processing`, `Compiler Design`, `E-commerce & Web Design`, `Principles of Marketing`) VALUES (NULL, '011192007','76','67','76','73','88');
+
+
+
+b_51
+
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192001','JUBAIDA JAHAN JUBARY','Female','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192003','SAIMA YESMIN EVA','Female','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192006','AZRINA AKTER LUNA','Female','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192011','MD. KHALID HOSSAIN','Male','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192012','IMRAN HOSSAIN','Male','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192013','MAHBUBUR RAHMAN','Male','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011192018','SANJIDA AKTER PAPON','Female','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011201004','MD. RAIYAD ALAM','Male','51');
+INSERT INTO `student` (`std_id`, `std_name`, `gender`, `batch`) VALUES ('011201029','ASIF ADNAN','Male','51');
+
+course
+
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011192006', '99',	'99',	'99',	'99',	'99');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011192001', '99',	'99',	'99',	'99',	'99');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011192003', '99',	'88',	'88',	'99',	'99');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011192011', '99',	'99',	'99',	'99',	'99');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011192012', '99',	'99',	'99',	'99',	'99');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011192013', '99',	'77',	'88',	'77',	'82');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011192018', '99',	'99',	'99',	'88',	'88');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011201004', '88',	'88',	'99',	'88',	'88');
+INSERT INTO `b_51` (`id`, `std_id`, `Digital Electronics & Logic Design`, `Operating System & System Programming`, `Data & Telecommunications`, `System Analysis & Design`, `Statistics`) VALUES (NULL, '011201029', '99',	'72',	'88',	'77',	'77');
+
+
+

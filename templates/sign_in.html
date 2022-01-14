@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/images/uoda.ico " />
+  <!-- aos -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- aos -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <!-- form -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/forms.css') }}" />
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/styles.css') }}" />
+    <title>UODA - Sign-in</title>
+  </head>
+  <body>
+    <ul class="nav justify-content-center fixed-top" style="background: transparent; z-index: 10">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/about">About</a>
+      </li>
+      {% if session['logged_in'] %}
+      <li class="nav-item nav-sign-out">
+        <p class="nav-link nav-username">{{ session['admin_name'] }}</p>
+        <a class="nav-link" href="/sign_out"><i class="fa fa-power-off"></i>Sign-out</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link active" href="/sign_in">Sign-in</a>
+      </li>
+      {% endif %}
+    </ul>
+    <div class="home">
+      <div class="form" id="sign-in">
+        <div id="form-container">
+          <div id="form-cover" >
+            <div data-aos="zoom-in" data-aos-duration="1000">
+
+            <h1 id="heading">Sign In</h1>
+            </div>
+            <form method="post" action="/" autocomplete="off">
+              <div id="inp-box-cover">
+                <div id="inp-padd">
+                  <div class="inp-box" id="email">
+                    <input type="email" class="inp" placeholder="Your email address" spellcheck="false" autocomplete="off" name="email" />
+                  </div>
+                  <div class="inp-box" id="password">
+                    <input type="password" class="inp" id="inp-password" placeholder="Password (More than 5 characters)" name="password" />
+                  </div>
+                  <div id="prev-action-btn"><i class="fa fa-chevron-circle-left"></i></div>
+                  <button id="submit" type="submit"><i class="fa fa-chevron-circle-up"></i></button>
+                  <div id="next-action-btn"><i class="fa fa-chevron-circle-right"></i></div>
+                </div>
+                <div id="progress-bar-cover">
+                  <div id="progress">
+                    <div id="working">
+                      <span class="working-text">Checking E-mail</span>
+                      <div class="spinner-border text-warning" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <p class="lg-text">Have a account ?</p>
+          <a href="/sign_up">Sign-up</a>
+        </div>
+      </div>
+    </div>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- navbar -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'JS/nav_scripts.js') }}"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- submitform -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'JS/sign_in.js') }}"></script>
+  </body>
+</html>

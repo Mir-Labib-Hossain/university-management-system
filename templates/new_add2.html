@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/images/uoda.ico " />
+
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/styles.css') }}" />
+    <title>UODA - Grading</title>
+</head>
+<body>
+    <ul class="nav justify-content-center fixed-top" style="background: transparent; z-index: 10">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/about">About</a>
+        </li>
+        {% if session['logged_in'] %}
+        <li class="nav-item nav-sign-out">
+            <p class="nav-link nav-username">{{ session['admin_name'] }}</p>
+            <a class="nav-link" href="/sign_out"><i class="fa fa-power-off"></i>Sign-out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/sign_in">Sign-in</a>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="home">
+        <div class="edit-container">
+            <div class="mb-3 edit-inp">
+                <label class="form-label">Batch</label>
+                <select class="edit-inp form-select m-0" id="batch">
+                    <option selected>Select Batch</option>
+                    {%for i in batches%}
+                    <option value="{{i[0]}}">{{i[0]}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="mb-3 edit-inp">
+                <label class="form-label">Semester</label>
+                <input id="semester" class="form-control" disabled value="N/A" />
+            </div>
+            <div class="mb-3 edit-inp">
+                <label class="form-label">Student Name</label>
+                <select class="edit-inp form-select m-0" id="name">
+                    <option selected>Select a name</option>
+                    {%for i in students%}
+                    <option value="{{i[2]}}">{{i[2]}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="mb-3 edit-inp">
+                <label class="form-label">Student id</label>
+                <input id="std_id" class="form-control" disabled value="N/A" />
+            </div>
+
+            <div class="mb-3 edit-inp" style="width: 75vw">
+                <label class="form-label">Sub 1</label>
+                <div class="d-flex">
+                    <select class="form-select" id="sub1">
+                        <option selected>Select a course</option>
+                        {%for i in course%}
+                        <option value="{{i[2]}}">{{i[2]}}</option>
+                        {%endfor%}
+                    </select>
+                    <input id="std_id" class="form-control" type="number" value="0" />
+                </div>
+            </div>
+            <div id='courseDiv'></div>
+            <div class="btn-grp">
+                <button class="btn btn-outline-primary" disabled id="addCourse">Add</button>
+                <button class="disabled btn btn-outline-danger">Generate</button>
+            </div>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- navbar -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'JS/nav_scripts.js') }}"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script>
+
+    </script>
+    <script>
+        var data = [
+        ];
+
+        $('#batch').change(function () {
+            batch = $('#batch').find(":selected").text();
+            semester = 10
+            switch (batch) {
+                case "48":
+                    semester = 10
+                    break;
+                case "49":
+                    semester = 9
+                    break;
+                case "50":
+                    semester = 8
+                    break;
+                case "51":
+                    semester = 7
+                    break;
+                default:
+                    semester = "N/A"
+                    break;
+            }
+            $('#courseDiv').html("");
+            if (batch == "Select Batch") {
+                $('#addCourse').prop("disabled", true);
+            }
+            else {
+                $('#addCourse').prop("disabled", false);
+                $('#semester').val(semester);
+                console.log(semester);
+                $.post("/new_add_get_course", { batch: batch }).done(function (reply) {
+                    courseName = reply.replace("[", "").replace("]", "").replace(/'/g, "").split(", ").slice(2,)
+                    data = [
+                        {
+                            id: 0,
+                            course: courseName[0]
+                        },
+                        {
+                            id: 1,
+                            course: courseName[1]
+                        },
+                        {
+                            id: 2,
+                            course: courseName[2]
+                        },
+                        {
+                            id: 3,
+                            course: courseName[3]
+                        },
+                        {
+                            id: 4,
+                            course: courseName[4]
+                        }
+                    ];
+                });
+            }
+
+        });
+        var selectedValue = [];
+        var select = "select_";
+        var counter = 1;
+        $(document).ready(function () {
+            $("#addCourse").on('click', function () {
+                var dataSource = [];
+                var option = ''
+                for (var i = 0; i < data.length; i++) {
+                    var name = data[i].course;
+                    if ($.inArray(name, selectedValue) == -1) {
+                        dataSource.push(data[i]);
+                        option += '<option value="' + name + '">' + name + '</option>'
+                    }
+                }
+                var config = {
+                    data: dataSource
+                }
+                var id = select + counter;
+                var selectcontrol = $("<select/>", { id: id });
+                selectcontrol.html(option)
+                selectcontrol.on('change', function () {
+                    var selvalue = $(this)[0].selectedOptions[0].label;
+                    if ($.inArray(selvalue, selectedValue) == -1) {
+                        selectedValue.push(selvalue);
+                    }
+                    $(this).attr("disabled", true)
+                })
+                inp = '<input id="std_id" class="form-control" type="number" value=id />'
+                $("#courseDiv").append(selectcontrol);
+                // $("#courseDiv").append(inp);
+                counter++;
+                console.log(dataSource);
+            })
+        })
+        $('#name').change(function () {
+            name = $('#name').find(":selected").text();
+
+            console.log(name);
+            $.post("/new_add_get_id", { name: name }).done(function (reply) {
+                $('#std_id').val(reply);
+            });
+        });
+
+        $(".enter").click(function (e) {
+            var input = [];
+            $("input").each(function (index) {
+                input[index] = $(this).val().trim();
+            });
+            gender = $('#gender').find(":selected").text();
+            input.splice(2, 0, gender)
+            column = `{{columnName}}`.replace(/&#39;/g, "").replace("[", "").replace("]", "").replace(/&amp;/g, "&").split(", ")
+            console.log(column);
+            console.log(input);
+            console.log();
+            std_query = "INSERT INTO student (`";
+            std_column = column.slice(0, 5).join("`, `");
+            std_query += std_column + "`) VALUES (NULL, '";
+            std_inp = input.slice(0, 3).join("', '");
+            std_query += std_inp + "', '{{batch}}')";
+
+            batch = `{{batch}}`;
+            batch_query = "INSERT INTO b_" + batch + " (`id`, `";
+            batch_column = column.slice(6,).join("`, `");
+            batch_query += batch_column + "`) VALUES (NULL,'" + input[0] + "', '";
+            batch_inp = input.slice(5,).join("', '");
+            batch_query += batch_inp + "')";
+            $.post("/adding", { batch_query: batch_query, std_query: std_query }).done(function (reply) {
+                window.location = "/student";
+            });
+
+            console.log(std_query);
+            console.log(batch_query);
+
+        });
+    </script>
+</body>
+</html>

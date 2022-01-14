@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/images/uoda.ico " />
+
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/styles.css') }}" />
+    <title>UODA - Grading</title>
+</head>
+<body>
+    <ul class="nav justify-content-center fixed-top" style="background: transparent; z-index: 10">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/about">About</a>
+        </li>
+        {% if session['logged_in'] %}
+        <li class="nav-item nav-sign-out">
+            <p class="nav-link nav-username">{{ session['admin_name'] }}</p>
+            <a class="nav-link" href="/sign_out"><i class="fa fa-power-off"></i>Sign-out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/sign_in">Sign-in</a>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="home">
+        <div class="edit-container">
+            {% for row in range(1, columnName|length) %}
+            {% if row!=6 %}
+            <div class="mb-3 edit-inp" {% if columnName[row]=="id" or columnName[row]=="batch" %}
+                style="height: 0px!important; width: 0px !important; overflow: hidden;margin: 0;" {% endif %}>
+                <label class="form-label">{{columnName[row].replace("_"," ")}}   </label>
+                {% if row == 3 %}
+                <select class="edit-inp form-select m-0" id="gender">
+                    <option selected value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                {%else%}
+                <input class="form-control" required />
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <div class="btn-grp">
+                <button class="enter btn btn-outline-primary">Add</button>
+                <a href="/student"><button class="btn btn-outline-danger">Close</button></a>
+            </div>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- navbar -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'JS/nav_scripts.js') }}"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script>
+
+    </script>
+    <script>
+        $(".enter").click(function (e) {
+            var input = [];
+            $("input").each(function (index) {
+                input[index] = $(this).val().trim();
+            });
+            gender = $('#gender').find(":selected").text();
+            input.splice(2, 0, gender)
+            column = `{{columnName}}`.replace(/&#39;/g, "").replace("[", "").replace("]", "").replace(/&amp;/g, "&").split(", ")
+            console.log(column);
+            console.log(input);
+            console.log();
+            std_query = "INSERT INTO student (`";
+            std_column = column.slice(0, 5).join("`, `");
+            std_query += std_column + "`) VALUES (NULL, '";
+            std_inp = input.slice(0, 3).join("', '");
+            std_query += std_inp + "', '{{batch}}')";
+
+            batch = `{{batch}}`;
+            batch_query = "INSERT INTO b_" + batch + " (`id`, `";
+            batch_column = column.slice(6,).join("`, `");
+            batch_query += batch_column + "`) VALUES (NULL,'" + input[0] + "', '";
+            batch_inp = input.slice(5,).join("', '");
+            batch_query += batch_inp + "')";
+            $.post("/adding", { batch_query: batch_query, std_query: std_query }).done(function (reply) {
+                window.location = "/student";
+            });
+
+            console.log(std_query);
+            console.log(batch_query);
+
+        });
+    </script>
+</body>
+</html>

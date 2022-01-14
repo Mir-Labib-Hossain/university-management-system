@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/images/uoda.ico " />
+
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='CSS/styles.css') }}" />
+    <title>UODA - Grading</title>
+</head>
+<body>
+    <ul class="nav justify-content-center fixed-top" style="background: transparent; z-index: 10">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/about">About</a>
+        </li>
+        {% if session['logged_in'] %}
+        <li class="nav-item nav-sign-out">
+            <p class="nav-link nav-username">{{ session['admin_name'] }}</p>
+            <a class="nav-link" href="/sign_out"><i class="fa fa-power-off"></i>Sign-out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/sign_in">Sign-in</a>
+        </li>
+        {% endif %}
+    </ul>
+    <div class="home">
+        <div class="edit-container">
+            
+            <div class="mb-3 edit-inp">
+                <label class="form-label">Batch</label>
+                <select class="edit-inp form-select m-0" id="batch">
+                    <option selected>Select Batch</option>
+                    {%for i in batches%}
+                    <option value="{{i[0]}}">{{i[0]}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+            <div class="mb-3 edit-inp">
+                <label class="form-label">Semester</label>
+                <input id="semester" class="form-control" disabled value="N/A" />
+            </div>
+            <div class="mb-3 edit-inp">
+                <label class="form-label">Student Name</label>
+                <select class="edit-inp form-select m-0" id="name">
+                    <option selected>Select a name</option>
+                    {%for i in students%}
+                    <option value="{{i[2]}}">{{i[2]}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+
+
+            <div id='courseDiv'></div>
+            <div class="btn-grp">
+                <button class="btn btn-outline-primary" disabled id="addCourse">Add</button>
+                <button class="btn btn-outline-danger" disabled id="gen">Generate</button>
+            </div>
+        </div>
+    </div>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- navbar -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'JS/nav_scripts.js') }}"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script>
+
+    </script>
+    <script>
+        var old_batch = 0
+        var batch = 0
+        var courseName = ""
+        var std_info = []
+        $('#addCourse').click(function () {
+            var input = [];
+            $("input").each(function (index) {
+                input[index] = $(this).val().trim();
+            });
+
+            courseMark = input.slice(1,)
+
+            // console.log("std_info");
+            // console.log(std_info);
+            // console.log("courseMark");
+            // console.log(courseMark);
+            // console.log("courseName");
+            batch_query = "INSERT INTO b_" + batch + " (`id`, `std_id`, `" + courseName.join("`, `") + "`)VALUES (NULL,'" + std_info[1] + "'," + courseMark.join(",") + ")"
+            std_query = "UPDATE `student` SET `batch` =  '" + batch + "' WHERE  std_id = '"+std_info[1]+"'"
+            delete_batch_query =  "DELETE FROM `b_"+old_batch+"` WHERE std_id = '"+std_info[1]+"'"
+            console.log(delete_batch_query);
+            console.log(batch_query);
+            console.log(std_query);
+            $.post("/replace", { delete_batch_query:delete_batch_query,batch_query: batch_query, std_query: std_query }).done(function (reply) {
+                // console.log(old_batch);
+                alert("Added")
+                // console.log(reply);
+                $('#gen').prop("disabled", false);
+                $('#addCourse').hide();
+                $('#gen').html('<a href="/generate/'+batch+'/'+std_info[1]+'">Generate</a>');
+                console.log(std_info[1]);
+
+            });
+        });
+        $('#batch').change(function () {
+            batch = $('#batch').find(":selected").text();
+            semester = 10
+            switch (batch) {
+                case "48":
+                    semester = 10
+                    break;
+                case "49":
+                    semester = 9
+                    break;
+                case "50":
+                    semester = 8
+                    break;
+                case "51":
+                    semester = 7
+                    break;
+                default:
+                    semester = "N/A"
+                    break;
+            }
+            $('#courseDiv').html("");
+            if (batch == "Select Batch") {
+                $('#addCourse').prop("disabled", true);
+                $('#std_name').prop("disabled", true);
+                $('#gen').prop("disabled", true);
+            }
+            else {
+                if (std_info.length == 5) {
+                    std_info.pop()
+                    std_info.push(batch)
+                }
+                $('#std_name').prop("disabled", true);
+                $('#addCourse').prop("disabled", false);
+                $('#gen').prop("disabled", false);
+                $('#semester').val(semester);
+                console.log(semester);
+                $.post("/new_add_get_course", { batch: batch }).done(function (reply) {
+                    courseName = reply.replace("[", "").replace("]", "").replace(/'/g, "").split(", ").slice(2,)
+                    courses = ""
+                    for (let i = 0; i < courseName.length; i++) {
+                        courses += '<div class="mb-3 edit-inp" ><label class="form-label">' + courseName[i] + '</label><input  class="form-control" type="number" value="0" /></div>'
+                    }
+                    $('#courseDiv').html(courses);
+                });
+            }
+        });
+
+        $('#name').change(function () {
+            name = $('#name').find(":selected").text();
+            $.post("/new_add_get_id", { name: name }).done(function (reply) {
+                std_info = reply.replace("(", "").replace(")", "").replace(/'/g, "").split(", ")
+                old_batch = std_info[4];
+                console.log(old_batch);
+            });
+        });
+
+    </script>
+</body>
+</html>

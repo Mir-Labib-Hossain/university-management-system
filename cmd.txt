@@ -1,0 +1,41 @@
+//open project folder
+G:\CODES\Python\Flask\Project-Grading
+
+//run the command in admin powerShell
+Set-ExecutionPolicy unrestricted
+
+//install virtual environment
+python -m venv G:\CODES\Python\Flask\Project-Grading
+
+//create a env folder and move the installed files in it
+G:\CODES\Python\Flask\Project-Grading\env
+
+//goto virtual invitual environment
+.\env\Scripts\Activate.ps1
+
+//install flask in pip
+ pip install flask
+
+//for starting the python server
+python app.py
+
+//if server stops after any changes are made
+FLASK_DEBUG=1 flask
+//then again start python server
+python app.py
+
+//for installinf database for flask
+pip install flask-sqlalchemy
+
+//instal yaml for db config
+pip install pyyaml
+
+// installing mail config
+pip install Flask-Mail
+
+// installing session config
+pip install Flask-Session
+
+
+
+

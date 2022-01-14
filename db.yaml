@@ -1,0 +1,15 @@
+# mysql
+mysql_host: 'localhost'
+mysql_user: 'root'
+mysql_password: ''
+mysql_db: 'grading'
+
+
+
+# mail
+mail_server: 'smtp.gmail.com'
+mail_port: 465
+mail_username: 'unetwork.varification@gmail.com'
+mail_password: 'PEKKaaaLVLaDULTTT'
+mail_use_tls: False
+mail_use_ssl: True

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/static/images/icons8-trophy-100.png" />
+   <!-- aos -->
+   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   <!-- aos -->
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- fontawsome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+  <!-- styles -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='CSS/styles.css') }}" />
+    <title>UODA - Grading</title>
+  </head>
+  <body>
+    <ul class="nav justify-content-center fixed-top" style="background: transparent; z-index: 10">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/about">About</a>
+      </li>
+      {% if session['logged_in'] %}
+      <li class="nav-item nav-sign-out">
+        <p class="nav-link nav-username">{{ session['admin_name'] }}</p>
+        <a class="nav-link" href="/sign_out"><i class="fa fa-power-off"></i>Sign-out</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="/sign_in">Sign-in</a>
+      </li>
+      {% endif %}
+    </ul>
+    <div class="home home-bottom" >
+      <div class="rank-container" data-aos="zoom-in">
+        
+        <!-- <div class="input-group mb-3">
+          <input type="text" class="inp-common" id="searchInput" placeholder="Enter student's 'Name' or 'ID'" style="width: calc(100% - 40px) !important" />
+          <button class="btn btn-outline-secondary" id="button-addon2"><i class="fa fa-search"></i></button>
+        </div> -->
+        <div id="batch-result">
+          <table class="table">
+            <tr class="table-warning">
+              <th>Rank</th>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>CGPA</th>
+              <th>BATCH</th>
+              <th>GENDER</th>
+            </tr>
+            <tbody id="fbody">
+              {% for row in range((students|length)-1) %}
+              <tr class="table-{% if students[row][3]== 'Male' %}info{% else %}danger{% endif %}">
+                <td>
+                  {% if row == 0 %}
+                  <img src="/static/images/icons8-medal-100-1.png " alt="{{row}}" />
+                  {% elif row == 1 %}
+                  <img src="/static/images/icons8-medal-100-2.png " alt="{{row}}" />
+                  {% elif row == 2 %}
+                  <img src="/static/images/icons8-medal-100-3.png " alt="{{row}}" />
+                  {% else %} {{row+1}} <sup>th</sup>
+                  {% endif %}
+                </td>
+                <td>{{ students[row][1] }}</td>
+                <td>{{ students[row][2] }}</td>
+                <td>N/A</td>
+                <td>{{ students[row][4] }}</td>
+                <td>{{ students[row][3] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- navbar -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'JS/nav_scripts.js') }}"></script>
+    <!-- bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+      
+    </script>
+  </body>
+</html>
